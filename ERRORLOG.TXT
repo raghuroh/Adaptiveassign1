@@ -310,3 +310,33 @@ Traceback (most recent call last):
   File "c:\users\raghur~1\envs\hellow~1\lib\site-packages\werkzeug\routing.py", line 1776, in build
     raise BuildError(endpoint, values, method, self)
 BuildError: Could not build url for endpoint 'edit_profile'. Did you mean 'user' instead?
+Exception on /login [POST]
+Traceback (most recent call last):
+  File "c:\users\raghur~1\envs\hellow~1\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\users\raghur~1\envs\hellow~1\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\users\raghur~1\envs\hellow~1\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\users\raghur~1\envs\hellow~1\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\users\raghur~1\envs\hellow~1\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\Raghu Rohith\adaptive\app\routes.py", line 36, in login
+    usertime = Usertime(user_id=user.id ,time_loggedin= datetime.utcnow())
+NameError: global name 'Usertime' is not defined
+Exception on /login [POST]
+Traceback (most recent call last):
+  File "c:\users\raghur~1\envs\hellow~1\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\users\raghur~1\envs\hellow~1\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\users\raghur~1\envs\hellow~1\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\users\raghur~1\envs\hellow~1\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\users\raghur~1\envs\hellow~1\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\Raghu Rohith\adaptive\app\routes.py", line 36, in login
+    usertime = Usertime(user_id=user.id ,time_loggedin= datetime.utcnow())
+NameError: global name 'Usertime' is not defined

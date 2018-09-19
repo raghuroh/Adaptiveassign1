@@ -6,7 +6,7 @@ from flask_login import login_required
 from flask import request
 from werkzeug.urls import url_parse
 from flask_login import current_user, login_user
-from app.models import User
+from app.models import User, Usertime
 from app import db
 from app.forms import RegistrationForm
 from datetime import datetime
@@ -17,6 +17,7 @@ from app.forms import EditProfileForm
 
 @app.route('/')
 @app.route('/index')
+@login_required
 def index():
     user = {'username': 'Miguel'}
     return render_template('index.html', title='Home', user=user)
@@ -33,6 +34,9 @@ def login():
             flash('Invalid username or password')
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
+        usertime = Usertime(user_id=user.id ,time_loggedin= datetime.utcnow())
+        db.session.add(usertime)
+        db.session.commit()
         return redirect(url_for('index'))
     return render_template('login.html', title='Sign In', form=form)
 
@@ -49,11 +53,26 @@ def register():
     if form.validate_on_submit():
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
-        db.session.add(user)
-        db.session.commit()
+        db.session.add(user)# creating new user row
+        db.session.commit()# 
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
+
+
+@login_required
+@app.route('/userlogs/<username>')
+def userlogs(username):
+    if current_user.is_authenticated:
+        usertimes=current_user.times.order_by(Usertime.time_loggedin.desc()).offset(1)
+    return render_template('user.html',user=current_user,times=usertimes)
+
+
+
+
+
+
+
 
 
 @app.route('/user/<username>')
